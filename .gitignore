@@ -23,7 +23,12 @@
 hs_err_pid*
 
 #Configuration files
+.metadata/
 .settings/
-.build/
 .classpath
 .project
+
+#Build files
+.build/
+bin/
+target/
