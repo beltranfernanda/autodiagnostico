@@ -1,7 +1,10 @@
 package co.edu.autodiagnostico.services;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -17,7 +20,7 @@ import co.edu.autodiagnostico.persistence.ConnectionDB;
 
 public class QuestionImpl implements QuestionApi{
 	UtilApi utilObject =  new UtilImpl();
-	Connection documentsConn = ConnectionDB.getConn();
+	Connection questionsConn = ConnectionDB.getConn();
 	Statement sentencia;
 	
 	@GET
@@ -30,19 +33,32 @@ public class QuestionImpl implements QuestionApi{
 
 	@POST
 	@Path("/addquestion")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	@Override
 	public ResponsePost addQuestion(Questions question) {
+		ResponsePost response = new ResponsePost();
 		try {
-			sentencia = documentsConn.createStatement();
-			String sql = "INSERT INTO Preguntas (idpreguntas,idespecialidad,pregunta)"
-					+ "VALUES ("+question.getIdQuestion()+","+question.getField().getIdField()+
-					","+question.getQuestion()+")";
-			sentencia.executeQuery(sql);
+			if(!utilObject.ifExist("pregunta",question.getQuestion(), "preguntas")){
+				String sql = "INSERT INTO preguntas (idespecialidad,pregunta)" + 
+						     " VALUES (?,?)";
+				PreparedStatement addStatement = questionsConn.prepareStatement(sql);
+				addStatement.setInt(1 , question.getField().getIdField());
+				addStatement.setString(2, question.getQuestion());
+				addStatement.executeUpdate();
+				response.setMessage("Se agrego la pregunta correctamente");
+				response.setCode(200);
+			}else {
+				response.setMessage("La pregunta ya existe");
+				response.setCode(400);
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			response.setMessage("Ocurrio un error en la consulta");
+			response.setCode(500);
+			System.out.println("Ocurrio un error al consultar la DB: "+e.getCause());
 			e.printStackTrace();
 		}		
-		return null;
+		return response;
 	}
 	
 
