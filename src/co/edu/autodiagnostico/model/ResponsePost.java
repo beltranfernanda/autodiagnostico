@@ -1,6 +1,6 @@
 package co.edu.autodiagnostico.model;
 
-public class Response {
+public class ResponsePost {
 	private boolean status;
 	private String message;
 	

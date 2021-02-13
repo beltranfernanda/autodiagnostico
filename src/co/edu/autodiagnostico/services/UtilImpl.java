@@ -1,11 +1,18 @@
 package co.edu.autodiagnostico.services;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class UtilImpl implements UtilApi{
-	
+import co.edu.autodiagnostico.persistence.ConnectionDB;
 
+public class UtilImpl implements UtilApi{
+	Connection objectConn = ConnectionDB.getConn();
+	Statement sentencia;
 
 	@Override
 	public JSONObject createResponse(int response) {
