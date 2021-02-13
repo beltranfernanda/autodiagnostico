@@ -8,5 +8,7 @@ public interface UtilApi {
 	public JSONArray convertMap(Map<Integer, String> parameter, String key1, String key2);
 	
 	public JSONObject createResponse(int response);
+	
+	public Boolean ifExist(String field, int id, String table);
 
 }
