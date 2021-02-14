@@ -1,5 +1,8 @@
 package co.edu.autodiagnostico.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "formstate")
 public class FormState {
 	private int idFormState;
 	private String State;

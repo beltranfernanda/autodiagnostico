@@ -7,6 +7,14 @@ public class Field {
 	private int idField;
 	private String nameField;
 	
+	public Field() {
+		
+	}
+	
+	public Field(int idField) {
+		this.idField = idField;
+	}
+	
 	public int getIdField() {
 		return idField;
 	}

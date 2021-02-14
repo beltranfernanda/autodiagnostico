@@ -1,10 +1,13 @@
 package co.edu.autodiagnostico.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "answers")
 public class Answers {
 	private int idAnswer;
 	private User user;
 	private Questions question;
-	private String asnwerDesc;
+	private String answerDesc;
 	
 	public int getIdAnswer() {
 		return idAnswer;
@@ -24,11 +27,11 @@ public class Answers {
 	public void setQuestion(Questions question) {
 		this.question = question;
 	}
-	public String getAsnwerDesc() {
-		return asnwerDesc;
+	public String getAnswerDesc() {
+		return answerDesc;
 	}
-	public void setAsnwerDesc(String asnwerDesc) {
-		this.asnwerDesc = asnwerDesc;
+	public void setAnswerDesc(String asnwerDesc) {
+		this.answerDesc = asnwerDesc;
 	}
 	
 	

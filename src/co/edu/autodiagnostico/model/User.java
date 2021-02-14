@@ -1,5 +1,8 @@
 package co.edu.autodiagnostico.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "user")
 public class User {
 	
 	private int idUser;
@@ -9,6 +12,13 @@ public class User {
 	private UserType userType;
 	private ContactInformation contactInfo;
 	
+	public User() {
+		
+	}
+	
+	public User(int idUser) {
+		this.idUser = idUser;
+	}
 	public int getIdUser() {
 		return idUser;
 	}

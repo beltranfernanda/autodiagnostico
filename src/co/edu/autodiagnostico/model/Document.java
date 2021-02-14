@@ -8,6 +8,10 @@ public class Document {
 		
 	}
 	
+	public Document(int idDocument) {
+		this.idDocument = idDocument;
+	}
+	
 	private int idDocument;
 	private String nameDocument;
 	

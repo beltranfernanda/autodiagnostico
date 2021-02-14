@@ -6,7 +6,6 @@ public class ContactInformation {
 	private String email;
 	private String phone;
 	private String address;
-	private User user;
 	
 	public int getIdContactInformation() {
 		return idContactInformation;
@@ -32,16 +31,11 @@ public class ContactInformation {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
+
 	@Override
 	public String toString() {
 		return "ContactInformation [idContactInformation=" + idContactInformation + ", email=" + email + ", phone="
-				+ phone + ", address=" + address + ", user=" + user + "]";
+				+ phone + ", address=" + address + "]";
 	}
 
 	

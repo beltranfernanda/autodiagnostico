@@ -5,6 +5,13 @@ public class UserType {
 	private int idUserType;
 	private String userTypeDesc;
 	
+	public UserType() {
+		
+	}
+	
+	public UserType(int idUserType) {
+		this.idUserType = idUserType;
+	}
 	public int getIdUserType() {
 		return idUserType;
 	}

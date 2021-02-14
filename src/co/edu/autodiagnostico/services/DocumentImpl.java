@@ -10,8 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.json.JSONArray;
-
+import org.json.JSONObject;
 
 import co.edu.autodiagnostico.model.Document;
 import co.edu.autodiagnostico.persistence.ConnectionDB;
@@ -27,7 +26,7 @@ public class DocumentImpl implements DocumentApi {
 	@GET
 	@Path("/getdocuments")
 	public Response getDocuments() {
-		JSONArray jsonResponse = new JSONArray();
+		JSONObject jsonResponse = new JSONObject();
 		Map<Integer, String> documents = new HashMap<Integer, String>();
 		Document documentObject = new Document();
 		try {
@@ -41,13 +40,19 @@ public class DocumentImpl implements DocumentApi {
 			}
 		} catch (SQLException e) {
 			System.out.println("Error consulting data base: "+e.getCause());
-			jsonResponse.put(utilObject.createResponse(500));
-			return Response.ok(jsonResponse.toString()).build();
+			jsonResponse = utilObject.createResponse(500);
+			return Response
+					.ok(jsonResponse.toString())
+					.header("Access-Control-Allow-Origin","*")
+					.build();
 		}
 		
-		jsonResponse.put(utilObject.createResponse(200));
-		jsonResponse.put(utilObject.convertMap(documents,"id","value"));		
-		return  Response.ok(jsonResponse.toString()).build();
+		jsonResponse = utilObject.createResponse(200);
+		jsonResponse.put("data", utilObject.convertMap(documents,"id","value"));		
+		return Response
+				.ok(jsonResponse.toString())
+				.header("Access-Control-Allow-Origin","*")
+				.build();
 	}
 
 }

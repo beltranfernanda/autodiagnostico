@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import co.edu.autodiagnostico.persistence.ConnectionDB;
 
 public class UtilImpl implements UtilApi{
