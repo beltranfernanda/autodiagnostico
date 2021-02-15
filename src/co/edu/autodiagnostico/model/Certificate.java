@@ -1,5 +1,8 @@
 package co.edu.autodiagnostico.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "certificate")
 public class Certificate {
 	private int idCertificate;
 	private User user;

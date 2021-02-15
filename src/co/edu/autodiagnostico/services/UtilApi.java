@@ -13,4 +13,5 @@ public interface UtilApi {
 	public Boolean ifExist(String field, int id, String table);
 	
 	public Boolean ifExist(String field, String value, String table);
+	
 }

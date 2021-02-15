@@ -102,7 +102,7 @@ public class FormStateImpl implements FormStateApi{
 	public Response setFormState(FormState formst) {
 		JSONObject response = new JSONObject();
 		try {
-			if(!utilObject.ifExist("idusuario",formst.getUser().getIdUser(), "estadoformulario")){
+			if(!ifExistState(formst.getUser().getIdUser(),formst.getField().getIdField() )){
 				String sql = "INSERT INTO estadoformulario (estado,idusuario,idespecialidad)" + 
 						     " VALUES (?,?,?)";
 				PreparedStatement addStatement = objectConn.prepareStatement(sql);
@@ -160,5 +160,27 @@ public class FormStateImpl implements FormStateApi{
 				.ok(response.toString())
 				.header("Access-Control-Allow-Origin","*")
 				.build();
+	}
+	
+	public Boolean ifExistState(int idUser, int idField) {		
+		try {
+			String sql = "SELECT COUNT(*) AS exist FROM estadoformulario WHERE  idusuario = ?"
+					+ " AND idespecialidad = ?";
+			PreparedStatement consultExist = objectConn.prepareStatement(sql);
+			consultExist.setInt(1, idUser);
+			consultExist.setInt(2, idField);
+			ResultSet result = consultExist.executeQuery();
+			while(result.next()) {
+				System.out.println(result.getString("exist"));
+				if(!result.getString("exist").equals("0")) {
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			System.out.println("Ocurrio un error al consultar la BD. Error: "+e.getStackTrace());
+			e.getMessage();
+			e.printStackTrace();
+		}
+		return false;
 	}
 }
