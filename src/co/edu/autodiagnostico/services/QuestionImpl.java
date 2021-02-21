@@ -33,6 +33,7 @@ public class QuestionImpl implements QuestionApi{
 		JSONObject jsonResponse = new JSONObject();
 		JSONArray questions = new JSONArray();
 		Questions questionObject = new Questions();
+		AnswersOptionsApi answersOB = new AnswersOptionsImpl();
 		try {
 			sentencia = questionsConn.createStatement();
 			String sql = "SELECT * FROM preguntas";
@@ -45,6 +46,7 @@ public class QuestionImpl implements QuestionApi{
 				questionjson.put("idpreguntas", questionObject.getIdQuestion());
 				questionjson.put("pregunta", questionObject.getQuestion());
 				questionjson.put("idespecialidad", questionObject.getField().getIdField());
+				questionjson.put("opciones", answersOB.getAnswers(questionObject.getIdQuestion()));
 				questions.put(questionjson);
 			}
 			jsonResponse = utilObject.createResponse(200);
@@ -65,6 +67,7 @@ public class QuestionImpl implements QuestionApi{
 		JSONObject jsonResponse = new JSONObject();
 		JSONArray questions = new JSONArray();
 		Questions questionObject = new Questions();
+		AnswersOptionsApi answersOB = new AnswersOptionsImpl();
 		try {
 			String sql = "SELECT * FROM preguntas WHERE idespecialidad= ?";
 			PreparedStatement statement = questionsConn.prepareStatement(sql);
@@ -78,6 +81,7 @@ public class QuestionImpl implements QuestionApi{
 				questionjson.put("idpreguntas", questionObject.getIdQuestion());
 				questionjson.put("pregunta", questionObject.getQuestion());
 				questionjson.put("idespecialidad", questionObject.getField().getIdField());
+				questionjson.put("opciones", answersOB.getAnswers(questionObject.getIdQuestion()));
 				questions.put(questionjson);
 			}
 			jsonResponse = utilObject.createResponse(200);

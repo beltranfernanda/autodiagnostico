@@ -1,5 +1,8 @@
 package co.edu.autodiagnostico.test;
 
+import co.edu.autodiagnostico.services.AnswersOptionsApi;
+import co.edu.autodiagnostico.services.AnswersOptionsImpl;
+
 //import co.edu.autodiagnostico.model.Field;
 //import co.edu.autodiagnostico.model.Questions;
 //import co.edu.autodiagnostico.model.ResponsePost;
@@ -11,7 +14,9 @@ public class Main {
 
 
 	public static void main(String[] args) {	
-	
+//		AnswersOptionsApi answersTest = new AnswersOptionsImpl();
+//		String response = answersTest.getAnswers(4).toString();
+//		System.out.println(response);
 //		UtilApi	utilObject = new UtilImpl();
 //		QuestionImpl q = new QuestionImpl();
 //		Questions question1 = new Questions();
