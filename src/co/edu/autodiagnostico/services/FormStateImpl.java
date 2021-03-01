@@ -94,6 +94,38 @@ public class FormStateImpl implements FormStateApi{
 		}		
 		return  Response.ok(jsonResponse.toString()).build();
 	}
+	
+	
+	@GET
+	@Path("/getformstfield/{id}/{idField}")
+	@Override
+	public Response getFormStateField(@PathParam("id") int idUsuario, @PathParam("idField") int idField) {
+		JSONObject jsonResponse = new JSONObject();
+		JSONObject formstate = new JSONObject();
+		FormState fstate = new FormState();
+		try {
+			String sql = "SELECT estado FROM estadoformulario WHERE idusuario = ? AND idespecialidad = ?";
+			PreparedStatement sentencia = objectConn.prepareStatement(sql);
+			sentencia.setInt(1, idUsuario);
+			sentencia.setInt(2, idField);
+			ResultSet rs= sentencia.executeQuery();
+			String formstateRes = "";
+			if(rs.next() == false) {
+				formstateRes = "SIN_ESTADO";
+			}else {
+				fstate.setState(rs.getString("estado"));
+				formstateRes = fstate.getState();
+			}
+			formstate.put("estado",formstateRes);
+			jsonResponse = utilObject.createResponse(200);
+			jsonResponse.put("data",formstate);
+		} catch (SQLException e) {
+			System.out.println("Error consulting data base: "+e.getCause());
+			jsonResponse = utilObject.createResponse(500);
+			return Response.ok(jsonResponse.toString()).build();
+		}		
+		return  Response.ok(jsonResponse.toString()).build();
+	}
 
 	@POST
 	@Path("/setstate")

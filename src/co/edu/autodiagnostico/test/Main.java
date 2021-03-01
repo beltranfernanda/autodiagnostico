@@ -1,7 +1,5 @@
 package co.edu.autodiagnostico.test;
 
-import co.edu.autodiagnostico.services.AnswersOptionsApi;
-import co.edu.autodiagnostico.services.AnswersOptionsImpl;
 
 //import co.edu.autodiagnostico.model.Field;
 //import co.edu.autodiagnostico.model.Questions;

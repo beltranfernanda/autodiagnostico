@@ -28,7 +28,7 @@ public class AnswersImpl implements AnswersApi{
 	public Response addExam(Answers[] answers) {
 		JSONObject response = new JSONObject();
 		JSONArray answersresult = new JSONArray();
-		for(Answers ans : answers) {
+		for(Answers ans : answers) {			
 			JSONObject responseDB = addAnswer(ans);
 			answersresult.put(responseDB);
 		}
